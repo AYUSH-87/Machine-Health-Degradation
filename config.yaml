@@ -1,0 +1,76 @@
+# =====================================================================
+# Configuration for Machine Health Degradation Monitoring System
+# Unsupervised Mean-Shift Clustering on Multi-Sensor Vibration Data
+# =====================================================================
+
+data:
+  # Path to default dataset
+  train_data_path: "data/synthetic_vibration.csv"
+  # Name of timestamp column (set to null if no timestamp, row order will be used)
+  timestamp_column: "timestamp"
+  # Multi-sensor vibration channels to monitor
+  sensor_columns:
+    - "accel_x"
+    - "accel_y"
+    - "accel_z"
+
+preprocessing:
+  # Scaling method: "robust", "standard", or "minmax"
+  # "robust" uses median and IQR, making it resilient to severe transient outliers
+  scaling_method: "robust"
+  # Missing value handling: "forward_fill", "median", or "drop"
+  missing_strategy: "forward_fill"
+
+features:
+  # Sampling frequency in Hz of the vibration sensors
+  sampling_rate_hz: 1000.0
+  # Sliding window size in raw samples for statistical & spectral feature extraction
+  window_size: 200
+  # Step size / stride between consecutive windows (e.g. 50 samples = 75% overlap)
+  window_step: 50
+  # Selected relevant vibration feature indicators (Time & Frequency domain)
+  time_domain_features:
+    - "rms"
+    - "crest_factor"
+    - "kurtosis"
+    - "peak_to_peak"
+    - "std"
+  frequency_domain_features:
+    - "dominant_frequency"
+    - "spectral_centroid"
+    - "spectral_energy"
+
+clustering:
+  # Mean-Shift bandwidth: set to null for automatic estimation, or float (e.g. 1.68)
+  bandwidth: null
+  # Quantile used for estimate_bandwidth (typical range: 0.08 to 0.25)
+  bandwidth_quantile: 0.10
+  # Max number of samples to use when estimating bandwidth
+  bandwidth_n_samples: 500
+  # Bin seeding accelerates Mean-Shift algorithm convergence
+  bin_seeding: true
+  # If true, all points will be clustered; if false, orphan points get label -1
+  cluster_all: true
+
+health_analysis:
+  # Method to identify nominal operating baseline cluster:
+  # - "earliest": The cluster dominant in the initial time fraction
+  # - "largest": The cluster containing the most samples
+  baseline_method: "earliest"
+  # Fraction of initial samples considered baseline healthy for "earliest" method
+  baseline_time_fraction: 0.25
+  # Health status degradation score thresholds (0 to 100 scale)
+  threshold_warning: 40.0
+  threshold_critical: 75.0
+  # Moving average smoothing window to filter transient shocks
+  smoothing_window: 5
+
+paths:
+  models_dir: "models"
+  reports_dir: "reports"
+  data_dir: "data"
+
+visualization:
+  dpi: 200
+  style: "seaborn-v0_8-whitegrid"
+  figure_format: "png"
