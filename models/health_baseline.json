@@ -1,0 +1,62 @@
+{
+  "baseline_method": "earliest",
+  "baseline_time_fraction": 0.25,
+  "threshold_warning": 40.0,
+  "threshold_critical": 75.0,
+  "smoothing_window": 5,
+  "nominal_cluster_id": 0,
+  "nominal_center": [
+    -0.1733471741956697,
+    -0.642669121477795,
+    -0.7345527007242016,
+    -0.18943432525522072,
+    -0.17366574554462452,
+    0.0,
+    -0.7598201089215572,
+    -0.13651991935680316,
+    -0.22799525606819632,
+    -0.5228801560164008,
+    -0.49967203898051027,
+    -0.17733110325369064,
+    -0.22811096171329848,
+    0.0,
+    -0.8012763068849624,
+    -0.17876941678223238,
+    -0.23474808362822933,
+    -0.6398258513646973,
+    -0.6382439276492191,
+    -0.2296704790106502,
+    -0.2344183198581927,
+    0.0,
+    -0.8082118340006909,
+    -0.178222293311254
+  ],
+  "baseline_distance_scale": 0.6272127604138872,
+  "cluster_health_profiles": {
+    "0": {
+      "cluster_id": 0,
+      "description": "Nominal Healthy Operating Mode",
+      "status": "NORMAL",
+      "sample_count": 46,
+      "centroid_distance_to_baseline": 0.0,
+      "mean_degradation_score": 10.0
+    },
+    "1": {
+      "cluster_id": 1,
+      "description": "Incipient Mechanical Degradation (Early Fault Signs)",
+      "status": "WARNING",
+      "sample_count": 48,
+      "centroid_distance_to_baseline": 2.5611,
+      "mean_degradation_score": 54.44
+    },
+    "2": {
+      "cluster_id": 2,
+      "description": "Severe Machine Health Degradation",
+      "status": "CRITICAL",
+      "sample_count": 23,
+      "centroid_distance_to_baseline": 14.9343,
+      "mean_degradation_score": 100.0
+    }
+  },
+  "is_calibrated": true
+}
